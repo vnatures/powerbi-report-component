@@ -2,16 +2,17 @@ import React from 'react';
 import { Form, Input, Button, Select } from 'antd';
 import { layout, tailLayout } from '../common/formLayoutStyles';
 
-const ReportForm = ({ onSubmit, initalReportProps }) => {
-  const onResetForm = () => {
-    window.location.reload();
-  };
-
+const ReportForm = ({ onSubmit, initalReportProps, onReset }) => {
   const [isSubmit, setIsSubmit] = React.useState(false);
 
-  const onSumitForm = ({ reportProps }) => {
+  const onSubmitForm = ({ reportProps }) => {
     setIsSubmit(true);
     onSubmit({ reportProps });
+  };
+
+  const onResetForm = () => {
+    setIsSubmit(false);
+    onReset(false);
   };
 
   return (
@@ -20,7 +21,7 @@ const ReportForm = ({ onSubmit, initalReportProps }) => {
       size="large"
       colon={false}
       name="reportProps"
-      onFinish={onSumitForm}
+      onFinish={onSubmitForm}
       initialValues={{ reportProps: initalReportProps }}
     >
       <Form.Item
